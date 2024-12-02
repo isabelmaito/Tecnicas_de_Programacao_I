@@ -1,0 +1,21 @@
+Classe OPERAÇÃO_EXTRATO:
+	Atributos:
+		STR descrição
+		FLOAT valor
+		STR numero_documento
+	
+
+Classe CONTA_CORRENTE
+	Atributos:
+		INT agência
+		INT conta
+		INT digito_verificador
+		LIST[OPERAÇÃO_EXTRATO] extrato
+		FLOAT saldo
+		FLOAT cheque_especial
+	Métodos:
+		criar()
+		sacar()
+		depositar()
+		imprimir_extrato()
+		
