@@ -1,0 +1,40 @@
+Fonte inicial para Alô Mundo e mostrar valores recebidos pelo teclado na janela terminal
+package com.mycompany.alomundo;
+
+import java.util.Scanner;  // pode ser só o Scanner
+
+/**
+
+*
+
+* @author claud       A a
+
+*/
+
+public class AloMundo {
+
+    public static void main(String[] args) {
+
+        int valor;		// Definindo uma variável do tipo inteiro
+
+        valor = Integer.parseInt(System.console().readLine("Digite Um valor: ")); // direto do objeto System
+
+        // valor = 15;		// Atribuindo um valor para a variável
+
+        System.out.printf ("Alo Mundo! %d%n",valor);	// Mostrando na tela uma mensagem e a variável
+ 
+        // Usando o método Scanner
+
+        System.out.println("Digite um segundo valor: "); // emite a mensagem para digitar o segundo número
+
+        Scanner ler = new Scanner(System.in); // usa a classe Scanner para criar o objeto ler
+
+        valor = Integer.parseInt(ler.nextLine()); // pega o método nextLine() do objeto ler
+
+         System.out.println ("Segundo valor digitado: " + valor); // Mostrando na tela uma mensagem e a variável
+
+    }
+
+}
+
+ 
