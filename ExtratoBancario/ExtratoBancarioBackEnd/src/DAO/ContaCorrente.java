@@ -120,7 +120,7 @@ public class ContaCorrente {
                 + this.getNum_agencia() + "','"                
                 + this.getNum_conta() + "','"                
                 + this.getID_cliente() + "','"
-                + this.getSaldo() + "','";
+                + this.getSaldo() + "'";
         
         return dadosContas;
     }

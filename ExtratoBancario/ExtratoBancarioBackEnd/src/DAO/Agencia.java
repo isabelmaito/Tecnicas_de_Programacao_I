@@ -22,16 +22,16 @@ public class Agencia {
     private String Cidade;
     private String UF;
     private String CEP;
-    private String CNPJ;
-    private String Gerente;
+    private String Telefone;
+
 
     public Agencia() {
     }
     
     
 
-    public Agencia(String Num_Agencia, String Nome, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String CNPJ, String Gerente) {
-        if (!ValidaAgencia(Num_Agencia, Nome, Endereco, Numero, Complemento, Bairro, Cidade, UF, CEP, CNPJ, Gerente)){
+    public Agencia(String Num_Agencia, String Nome, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String Telefone) {
+        if (!ValidaAgencia(Num_Agencia, Nome, Endereco, Numero, Complemento, Bairro, Cidade, UF, CEP, Telefone)){
             System.out.println("Erro");
         }
         this.Num_Agencia = Num_Agencia;
@@ -43,8 +43,7 @@ public class Agencia {
         this.Cidade = Cidade;
         this.UF = UF;
         this.CEP = CEP;
-        this.CNPJ = CNPJ;
-        this.Gerente = Gerente;
+        this.Telefone = Telefone;
     }
 
     public String getNum_Agencia() {
@@ -164,28 +163,15 @@ public class Agencia {
         }
     }
     
-    public String getCNPJ() {
-        return CNPJ;
+    public String getTelefone() {
+        return Telefone;
     }
 
-    public void setCNPJ(String CNPJ) throws Exception {
-        if(ValidaCNPJ(CNPJ)){
-           this.CNPJ = CNPJ;
+    public void setTelefone(String Telefone) throws Exception {
+        if(ValidaTelefone(Telefone)){
+           this.Telefone = Telefone;
     }else{
-            JOptionPane.showMessageDialog(null, "CNPJ precisa ter 14 dígitos.");
-            throw new Exception("Dados invalidos");
-        }
-    }
-    
-    public String getGerente() {
-        return Gerente;
-    }
-
-    public void setGerente(String Gerente) throws Exception{
-        if(ValidaGerente(Gerente)){
-          this.Gerente = Gerente;
-    }else{
-            JOptionPane.showMessageDialog(null, "Gerente não pode ser vazio.");
+            JOptionPane.showMessageDialog(null, "Telefone precisa ter 9 dígitos.");
             throw new Exception("Dados invalidos");
         }
     }
@@ -247,20 +233,15 @@ public class Agencia {
                CEP.length() == 8;
     }
     
-    private boolean ValidaCNPJ(String CNPJ){
-        return CNPJ != null &&
-               !CNPJ.isBlank() &&
-               !CNPJ.isEmpty() &&
-               CNPJ.length() ==14;
+    private boolean ValidaTelefone(String Telefone){
+        return Telefone != null &&
+               !Telefone.isBlank() &&
+               !Telefone.isEmpty() &&
+               Telefone.length() ==9;
     }
     
-    private boolean ValidaGerente(String Gerente){
-        return Gerente != null &&
-               !Gerente.isBlank() &&
-               !Gerente.isEmpty();
-    }
     
-    private boolean ValidaAgencia(String Num_Agencia, String Nome, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String CNPJ, String Gerente){
+    private boolean ValidaAgencia(String Num_Agencia, String Nome, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String Telefone){
         return ValidaNumAgencia(Num_Agencia) &&
                ValidaNome(Nome) &&
                ValidaEndereco(Endereco) &&
@@ -270,8 +251,7 @@ public class Agencia {
                ValidaCidade(Cidade) &&
                ValidaUF(UF) &&
                ValidaCEP(CEP) &&
-               ValidaCNPJ(CNPJ) &&
-               ValidaGerente(Gerente);
+               ValidaTelefone(Telefone);
     }
     
     public String dadosSQLValues(){
@@ -285,10 +265,8 @@ public class Agencia {
                 + this.getBairro() + "','"
                 + this.getCidade() + "','"
                 + this.getUF() + "','"
-                + this.getCEP() + "','"
-                
-                + this.getCNPJ() + "','"
-                + this.getGerente() + "','";
+                + this.getCEP() + "','"                
+                + this.getTelefone() + "'";
         
         return dadosAgencias;
     }

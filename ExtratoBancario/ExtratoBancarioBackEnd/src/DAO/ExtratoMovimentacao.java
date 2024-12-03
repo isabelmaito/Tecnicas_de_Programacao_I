@@ -19,12 +19,15 @@ public class ExtratoMovimentacao {
     private String Data_mov;
     private String Credito_debito;
     private Integer ID_hist;
+    private String ComplHist;
+    private Integer Valor;
+    private Integer Saldo;
 
     public ExtratoMovimentacao() {
     }
     
-    public ExtratoMovimentacao(String Num_conta, String Num_agencia, String Documento, String Data_mov, String Credito_debito, Integer ID_hist) {
-        if (!ValidaExtratoMovimentacao(Num_conta, Num_agencia, Documento, Data_mov, Credito_debito, ID_hist)){
+    public ExtratoMovimentacao(String Num_conta, String Num_agencia, String Documento, String Data_mov, String Credito_debito, Integer ID_hist,String ComplHist, Integer Valor, Integer Saldo) {
+        if (!ValidaExtratoMovimentacao(Num_conta, Num_agencia, Documento, Data_mov, Credito_debito, ID_hist, ComplHist, Valor, Saldo)){
             System.out.println("Erro");
         }
         this.Num_conta = Num_conta;
@@ -33,6 +36,9 @@ public class ExtratoMovimentacao {
         this.Data_mov = Data_mov;
         this.Credito_debito = Credito_debito;
         this.ID_hist = ID_hist;
+        this.ComplHist = ComplHist;
+        this.Valor = Valor;
+        this.Saldo = Saldo;
     }
 
     public String getNum_conta() {
@@ -112,6 +118,45 @@ public class ExtratoMovimentacao {
             throw new Exception("Dados invalidos");
         }
     } 
+    
+    public String getComplHist() {
+        return ComplHist;
+    }
+
+    public void setComplHist(String ComplHist)  throws Exception{
+        if (!ValidaComplHist(ComplHist)) {
+            this.ComplHist = ComplHist;
+    }else{
+            JOptionPane.showMessageDialog(null, "Complemento Histórico não pode ser vazio.");
+            throw new Exception("Dados invalidos");
+        }
+    }
+
+    public int getValor() {
+        return Valor;
+    }
+
+    public void setValor(Integer Valor) throws Exception{
+        if (!ValidaValor(Valor)) {
+            this.Valor = Valor;
+}else{
+            JOptionPane.showMessageDialog(null, "Valor não pode ser vazio.");
+            throw new Exception("Dados invalidos");
+        }
+    }
+
+    public int getSaldo() {
+        return Saldo;
+    }
+
+    public void setSaldo(Integer Saldo) throws Exception{
+        if (!ValidaSaldo(Saldo)) {
+            this.Saldo = Saldo;
+}else{
+            JOptionPane.showMessageDialog(null, "Saldo não pode ser vazio.");
+            throw new Exception("Dados invalidos");
+        }
+    }
         
     private boolean ValidaNumConta(String Num_conta){
             return Num_conta != null &&
@@ -150,13 +195,28 @@ public class ExtratoMovimentacao {
             return ID_hist != null;
     }
 
-    private boolean ValidaExtratoMovimentacao(String Num_conta, String Num_agencia, String Documento, String Data_mov, String Credito_debito, Integer ID_hist){
+    private boolean ValidaComplHist(String ComplHist){
+            return ComplHist != null;
+    }
+    
+    private boolean ValidaValor(Integer Valor) {
+            return Valor >= 0;
+    }
+    
+    private boolean ValidaSaldo(Integer Saldo) {
+            return Saldo >= 0;
+    }
+    
+    private boolean ValidaExtratoMovimentacao(String Num_conta, String Num_agencia, String Documento, String Data_mov, String Credito_debito, Integer ID_hist, String ComplHist1, Integer Valor1, Integer Saldo1){
         return ValidaNumConta(Num_conta) &&
                ValidaNum_agencia(Num_agencia) &&
                ValidaDocumento(Documento) &&
                ValidaDataMov(Data_mov) &&
                ValidaCredito_debito(Credito_debito) &&
-               ValidaIDHist(ID_hist);
+               ValidaIDHist(ID_hist) &&
+               ValidaComplHist(ComplHist) &&
+               ValidaValor(Valor) &&
+               ValidaSaldo(Saldo);
     }
     
     public String dadosSQLValues(){
@@ -166,14 +226,12 @@ public class ExtratoMovimentacao {
                 + this.getNum_conta() + "','"
                 + this.getData_mov() + "','"                
                 + this.getDocumento() + "','"
-
-
                 + this.getCredito_debito() + "','"
-                + this.getDebito() + "','"
                 + this.getID_hist() + "','"
-
-                ;
-        
+                + this.getComplHist() + "', "
+                + this.getValor() + ", "
+                + this.getSaldo() + "'";
+                        
         return dadosExtratos;
     }
 }

@@ -5,6 +5,7 @@
 package View;
 
 import DAO.ExtratoMovimentacao;
+import DAO.connectDAO;
 import javax.swing.JOptionPane;
 /**
  *
@@ -40,11 +41,17 @@ public class Extratos extends javax.swing.JFrame {
         DataExtrato = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        IDExtrato = new javax.swing.JTextField();
+        ID_histExtrato = new javax.swing.JTextField();
         ButtonCadastrar = new javax.swing.JButton();
         ButtonDetalhes = new javax.swing.JButton();
         Limpar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Credito_debitoExtrato = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        ValorExtrato = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        SaldoExtrato = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        ComplHistExtrato = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,9 +91,9 @@ public class Extratos extends javax.swing.JFrame {
 
         jLabel7.setText("ID");
 
-        IDExtrato.addActionListener(new java.awt.event.ActionListener() {
+        ID_histExtrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDExtratoActionPerformed(evt);
+                ID_histExtratoActionPerformed(evt);
             }
         });
 
@@ -111,7 +118,31 @@ public class Extratos extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Crédito", "Débito" }));
+        Credito_debitoExtrato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Crédito", "Débito" }));
+
+        jLabel6.setText("Valor");
+
+        ValorExtrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ValorExtratoActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Saldo");
+
+        SaldoExtrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaldoExtratoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Complemento Histórico");
+
+        ComplHistExtrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComplHistExtratoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,49 +150,65 @@ public class Extratos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ContaExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(DocExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(AgenciaExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(ValorExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DataExtrato))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ButtonCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonDetalhes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Limpar)))
-                .addGap(0, 8, Short.MAX_VALUE))
+                        .addComponent(SaldoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(ButtonCadastrar)
+                            .addGap(9, 9, 9)
+                            .addComponent(ButtonDetalhes)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Limpar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(ComplHistExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(ContaExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(DocExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(AgenciaExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(Credito_debitoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(ID_histExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(DataExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(0, 0, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IDExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ID_histExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel3)
                     .addComponent(DataExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,15 +221,24 @@ public class Extratos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DocExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Credito_debitoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonCadastrar)
-                    .addComponent(ButtonDetalhes)
+                    .addComponent(jLabel6)
+                    .addComponent(ValorExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(SaldoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(ComplHistExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ButtonCadastrar)
+                        .addComponent(ButtonDetalhes))
                     .addComponent(Limpar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -206,20 +262,27 @@ public class Extratos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DataExtratoActionPerformed
 
-    private void IDExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDExtratoActionPerformed
+    private void ID_histExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ID_histExtratoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IDExtratoActionPerformed
+    }//GEN-LAST:event_ID_histExtratoActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
         try{
             extrato_tela.setNum_agencia(AgenciaExtrato.getText());
             extrato_tela.setNum_conta(ContaExtrato.getText());
-            extrato_tela.setID_hist(Integer.valueOf(IDExtrato.getText()));
+            extrato_tela.setID_hist(Integer.valueOf(ID_histExtrato.getText()));
             extrato_tela.setDocumento(DocExtrato.getText());
             extrato_tela.setData_mov(DataExtrato.getText());
-            extrato_tela.setCredito(CreditoExtrato.getText());
-            extrato_tela.setDebito(DebitoExtrato.getText());
-        }catch(Exception e){
+            extrato_tela.setCredito_debito(Credito_debitoExtrato.getSelectedItem().toString().substring(0,1));
+            extrato_tela.setComplHist(ComplHistExtrato.getText());
+            extrato_tela.setValor(Integer.parseInt(ValorExtrato.getText()));
+            extrato_tela.setSaldo(Integer.parseInt(SaldoExtrato.getText()));
+            
+            connectDAO DaoExtrato = new connectDAO();
+            DaoExtrato.connectDB();
+            DaoExtrato.insereRegistroJFBD("MOVIMENTACAO", extrato_tela.dadosSQLValues());
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(this, erro.getMessage());
             return;
         }
         
@@ -237,12 +300,26 @@ public class Extratos extends javax.swing.JFrame {
         AgenciaExtrato.setText(" ");
         ContaExtrato.setText(" ");
         DocExtrato.setText(" ");
-        IDExtrato.setText(" ");
+        ID_histExtrato.setText(" ");
         DataExtrato.setText(" ");
-        CreditoExtrato.setText(" ");
-        DebitoExtrato.setText(" ");
+        Credito_debitoExtrato.setSelectedIndex(0);
+        ComplHistExtrato.setText(" ");
+        ValorExtrato.setText(" ");
+        SaldoExtrato.setText(" ");
         // TODO add your handling code here:
     }//GEN-LAST:event_LimparActionPerformed
+
+    private void ValorExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValorExtratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ValorExtratoActionPerformed
+
+    private void SaldoExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaldoExtratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaldoExtratoActionPerformed
+
+    private void ComplHistExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplHistExtratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComplHistExtratoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,17 +360,23 @@ public class Extratos extends javax.swing.JFrame {
     private javax.swing.JTextField AgenciaExtrato;
     private javax.swing.JButton ButtonCadastrar;
     private javax.swing.JButton ButtonDetalhes;
+    private javax.swing.JTextField ComplHistExtrato;
     private javax.swing.JTextField ContaExtrato;
+    private javax.swing.JComboBox<String> Credito_debitoExtrato;
     private javax.swing.JTextField DataExtrato;
     private javax.swing.JTextField DocExtrato;
-    private javax.swing.JTextField IDExtrato;
+    private javax.swing.JTextField ID_histExtrato;
     private javax.swing.JButton Limpar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField SaldoExtrato;
+    private javax.swing.JTextField ValorExtrato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

@@ -72,7 +72,7 @@ public class Historico {
         String dadosHistoricos;
         dadosHistoricos = "'"
                 + this.getID_historico() + "','"
-                + this.getHistorico() + "','";
+                + this.getHistorico() + "'";
         
         return dadosHistoricos;
     }

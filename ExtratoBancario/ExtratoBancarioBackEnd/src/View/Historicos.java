@@ -5,6 +5,7 @@
 package View;
 
 import DAO.Historico;
+import DAO.connectDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -133,7 +134,12 @@ public class Historicos extends javax.swing.JFrame {
         try{
             historico_tela.setID_historico(Integer.valueOf(IDHistorico.getText()));
             historico_tela.setHistorico(HistoricoHistorico.getText());
-        }catch(Exception e){
+            
+            connectDAO DaoHist = new connectDAO();
+            DaoHist.connectDB();
+            DaoHist.insereRegistroJFBD("HISTORICOS", historico_tela.dadosSQLValues());
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(this, erro.getMessage());
             return;
         }
         

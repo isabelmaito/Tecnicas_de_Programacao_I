@@ -16,25 +16,24 @@ public class Cliente {
     private String tabela = "clientes";
     private String ID_cliente;
     private String Nome;
-    private String CPF;
-    private String Endereco;
+    private String Endereco; 
     private String Numero;
     private String Complemento;
     private String Bairro;
     private String Cidade;
     private String UF;
-    private String CEP;
-    private String Email;
-    private String Telefone;
+    private String CEP;    
+    private String Telefone;    
+    private String CPF;
+    private String Data_nascimento;
     private String CNPJ; 
-    private String Genero;
     private boolean Status;
 
     public Cliente() {
     }
 
-    public Cliente(String ID_cliente, String Nome, String CPF, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String Email, String Telefone, String CNPJ, String Genero, boolean Status) {
-        if (!ValidaCliente(ID_cliente, Nome, CPF, Endereco, Numero, Complemento, Bairro, Cidade, UF, CEP, Email, Telefone, CNPJ, Genero, Status)){
+    public Cliente(String ID_cliente, String Nome, String CPF, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String Data_nascimento, String Telefone, String CNPJ, boolean Status) {
+        if (!ValidaCliente(ID_cliente, Nome, CPF, Endereco, Numero, Complemento, Bairro, Cidade, UF, CEP, Data_nascimento, Telefone, CNPJ, Status)){
             System.out.println("Erro");
         }
         this.ID_cliente = ID_cliente;
@@ -47,10 +46,9 @@ public class Cliente {
         this.Cidade = Cidade;
         this.UF = UF;
         this.CEP = CEP;
-        this.Email = Email;
+        this.Data_nascimento = Data_nascimento;
         this.Telefone = Telefone;
         this.CNPJ = CNPJ;
-        this.Genero = Genero;
         this.Status = Status;
     }
 
@@ -183,15 +181,15 @@ public class Cliente {
         }
     }
 
-    public String getEmail() {
-        return Email;
+    public String getData_nascimento() {
+        return Data_nascimento;
     }
 
-    public void setEmail(String Email) throws Exception{
-        if (ValidaEmail(Email)){
-        this.Email = Email;
+    public void setData_nascimento(String Data_nascimento) throws Exception{
+        if (ValidaData_nascimento(Data_nascimento)){
+        this.Data_nascimento = Data_nascimento;
         }else{
-            JOptionPane.showMessageDialog(null, "E-mail não pode ser vazio.");
+            JOptionPane.showMessageDialog(null, "Data de Nascimento não pode ser vazio.");
             throw new Exception("Dados invalidos");
         }
     }
@@ -220,19 +218,6 @@ public class Cliente {
             JOptionPane.showMessageDialog(null, "CNPJ precisa ter 14 dígitos");
             throw new Exception("Dados invalidos");
         }
-    }
-
-    public String getGenero() {
-        return Genero;
-    }
-
-    public void setGenero(String Genero) throws Exception{
-        if (ValidaGenero(Genero)){
-            this.Genero = Genero;
-        }else{
-            JOptionPane.showMessageDialog(null, "Genero não pode ser vazio.");
-            throw new Exception("Dados invalidos");
-        }        
     }
 
     public boolean isStatus() {
@@ -306,10 +291,10 @@ public class Cliente {
                CEP.length() == 8;
     }
     
-    private boolean ValidaEmail(String Email){
-        return Email != null &&
-               !Email.isBlank() &&
-               !Email.isEmpty();
+    private boolean ValidaData_nascimento(String Data_nascimento){
+        return Data_nascimento != null &&
+               !Data_nascimento.isBlank() &&
+               !Data_nascimento.isEmpty();
     }
     
     private boolean ValidaTelefone(String Telefone){
@@ -318,11 +303,6 @@ public class Cliente {
                !Telefone.isEmpty();
     }
     
-    private boolean ValidaGenero(String Genero){
-        return Genero != null &&
-               !Genero.isBlank() &&
-               !Genero.isEmpty();
-    }
     
     private boolean ValidaCNPJ(String CNPJ){
         return CNPJ != null &&
@@ -335,7 +315,7 @@ public class Cliente {
         return Status != null;
     }
     
-    private boolean ValidaCliente(String ID_cliente, String Nome, String CPF, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String Email, String Telefone, String CNPJ, String Genero, boolean Status){
+    private boolean ValidaCliente(String ID_cliente, String Nome, String CPF, String Endereco, String Numero, String Complemento, String Bairro, String Cidade, String UF, String CEP, String Data_nascimento, String Telefone, String CNPJ, boolean Status){
         return ValidaIDCliente(ID_cliente) &&
                ValidaNome(Nome) &&
                ValidaCPF(CPF) &&
@@ -346,10 +326,9 @@ public class Cliente {
                ValidaCidade(Cidade) &&
                ValidaUF(UF) &&
                ValidaCEP(CEP) &&
-               ValidaEmail(Email) &&
+               ValidaData_nascimento(Data_nascimento) &&
                ValidaTelefone(Telefone) &&
                ValidaCNPJ(CNPJ) &&
-               ValidaGenero(Genero) &&
                ValidaStatus(Status);
     }
 
@@ -366,12 +345,9 @@ public class Cliente {
                 + this.getUF() + "','"
                 + this.getCEP() + "','"
                 + this.getTelefone() + "','"
-                + this.getCPF() + "','"     
-                
-                + this.getEmail() + "','"
-                
-                + this.getGenero() + "','"
-                + this.getCNPJ() + "','";        
+                + this.getCPF() + "','"                    
+                + this.getData_nascimento() + "','"
+                + this.getCNPJ() + "'";        
         return dadosClientes;
     }
 }

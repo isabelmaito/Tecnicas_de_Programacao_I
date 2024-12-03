@@ -5,6 +5,7 @@
 package View;
 
 import DAO.ContaCorrente;
+import DAO.connectDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -177,7 +178,12 @@ public class Contas extends javax.swing.JFrame {
         conta_tela.setNum_conta(ContaConta.getText());
         conta_tela.setID_cliente(IDConta.getText());
         conta_tela.setSaldo(Float.valueOf(SaldoConta.getText()));
-        } catch(Exception e){
+        
+        connectDAO DaoConta = new connectDAO();
+            DaoConta.connectDB();
+            DaoConta.insereRegistroJFBD("CONTACORRENTE", conta_tela.dadosSQLValues());
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(this, erro.getMessage());
             return;
         }
         

@@ -5,6 +5,7 @@
 package View;
 
 import DAO.Usuario;
+import DAO.connectDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,11 +34,13 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         IDUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        LoginUsuario = new javax.swing.JTextField();
+        Num_agenciaUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         SenhaUsuario = new javax.swing.JTextField();
         ButtonCadastrar = new javax.swing.JButton();
         Limpar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        Num_contaUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,11 +52,11 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Login:");
+        jLabel2.setText("Agencia:");
 
-        LoginUsuario.addActionListener(new java.awt.event.ActionListener() {
+        Num_agenciaUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginUsuarioActionPerformed(evt);
+                Num_agenciaUsuarioActionPerformed(evt);
             }
         });
 
@@ -79,30 +82,43 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Conta");
+
+        Num_contaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Num_contaUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDUsuario))
+                        .addComponent(ButtonCadastrar)
+                        .addGap(130, 130, 130)
+                        .addComponent(Limpar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(IDUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Num_agenciaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SenhaUsuario)
-                            .addComponent(LoginUsuario)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ButtonCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addComponent(Limpar)))
-                .addContainerGap())
+                            .addComponent(SenhaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(Num_contaUsuario)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,19 +126,22 @@ public class Usuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IDUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(SenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(LoginUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(SenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonCadastrar)
-                    .addComponent(Limpar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(Num_contaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(Num_agenciaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Limpar)
+                    .addComponent(ButtonCadastrar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,9 +152,9 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IDUsuarioActionPerformed
 
-    private void LoginUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginUsuarioActionPerformed
+    private void Num_agenciaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Num_agenciaUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LoginUsuarioActionPerformed
+    }//GEN-LAST:event_Num_agenciaUsuarioActionPerformed
 
     private void SenhaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SenhaUsuarioActionPerformed
         // TODO add your handling code here:
@@ -144,9 +163,15 @@ public class Usuarios extends javax.swing.JFrame {
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
         try {
             usuario_tela.setID_cliente(IDUsuario.getText());
-            usuario_tela.setLogin(LoginUsuario.getText());
+            usuario_tela.setNum_agencia(Num_agenciaUsuario.getText());
+            usuario_tela.setNum_conta(Num_contaUsuario.getText());
             usuario_tela.setSenha(SenhaUsuario.getText());
-        } catch(Exception e){
+            
+            connectDAO DaoUsuario = new connectDAO();
+            DaoUsuario.connectDB();
+            DaoUsuario.insereRegistroJFBD("USUARIOS", usuario_tela.dadosSQLValues());
+        }catch(Exception erro){
+            JOptionPane.showMessageDialog(this, erro.getMessage());
             return;
         }
 
@@ -158,10 +183,15 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
         IDUsuario.setText(" ");
-        LoginUsuario.setText(" ");
+        Num_agenciaUsuario.setText(" ");
+        Num_contaUsuario.setText(" ");
         SenhaUsuario.setText(" ");
         // TODO add your handling code here:
     }//GEN-LAST:event_LimparActionPerformed
+
+    private void Num_contaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Num_contaUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Num_contaUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,10 +232,12 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCadastrar;
     private javax.swing.JTextField IDUsuario;
     private javax.swing.JButton Limpar;
-    private javax.swing.JTextField LoginUsuario;
+    private javax.swing.JTextField Num_agenciaUsuario;
+    private javax.swing.JTextField Num_contaUsuario;
     private javax.swing.JTextField SenhaUsuario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
